@@ -1,16 +1,16 @@
-<?php 
- $host = "localhost";
- $hostuser = "root";
- $hostpw = "";
- $hostdb = "mi_blog";
+<?php
+$host = 'localhost';
+$dbname = 'mi_blog';
+$user = 'root';
+$password = '';
+define('RUTA', 'http://localhost/phpramos/blog_prueba');
 
- $conexion = mysqli_connect($host,$hostuser,$hostpw,$hostdb);
+try{
+//MYSQL Con PDO//
+$conexion = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8",$user,$password);
+$conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch(PDOException $e){
+echo $e->getMessage();
+}
 
- if($conexion){
- 	return "conectado";
- }else{
- 	return"no conectado";
- }
-
-
- ?>
+?>

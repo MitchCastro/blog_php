@@ -1,3 +1,8 @@
+<?php 
+session_start();
+$nombre=$_SESSION['nombreusuario'];
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +13,7 @@
 <script src="header.js"></script>
 </head>
 <body>
+    <h6>bienvenido <?php echo $nombre; ?></h6>
     <header class="">
         <div class="wrapper">
             
@@ -22,13 +28,34 @@
     </div>
     </header>
     <section class="contenido wrapper">
-        <h1>lalomolon</h1>
-<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus.</p>
+        <?php 
+        //desmadre para hacer las publicaciones
+        include("conexion.php");
+         function tabla($tabla,$conexion)
+     {
+        $query = $conexion->prepare("select * from $tabla");
+        $query->execute();
+        return $query;
+     }
+        $pubs=tabla("publicaciones",$conexion);
+        foreach ($pubs as $pub) {
+            echo $pub['titulo'];
+            echo "<br>";
+            echo "<br>";
+            echo $pub['descripcion'];
+            echo "<br>";
+            echo "<br>";
+            echo $pub['autor'];
+            echo "<br>";
+            echo "<br>";// aqui terminar el desmadre de las publicaciones XDDDD
+        }
+
+         ?>
+               
+    </section>   
 
 
-<h1>Byyjesus</h1>
-<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus.</p>        
-    </section>    
+   
 
 </body>
 </html>
